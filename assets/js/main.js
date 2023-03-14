@@ -2,17 +2,16 @@ const pokemonListEl = document.querySelector('.pokemons');
 
 function addPokemonOnList(pokemon){
     return`
-    <li class="pokemon">
-    <span class="number">#${pokemon.order}</span>
+    <li class="pokemon ${pokemon.type}">
+    <span class="number">#${pokemon.number}</span>
     ${pokemon.name}
 
     <div class="detail">
         <ol class="types">
-            <li class="type">Grass</li>
-            <li class="type">Poison</li>
+            ${pokemon.types.map((type) => `<li class="type">${type}</li>`).join('')}
         </ol>
 
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="">
+        <img src="${pokemon.photo}" alt="${pokemon.name}">
     </div>
     
 </li>

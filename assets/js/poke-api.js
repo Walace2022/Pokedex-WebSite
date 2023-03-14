@@ -1,7 +1,24 @@
 const pokeApi = {};
 
+
+function convertPokeDetailsToPokemon(pokeDetails){
+    const pokemon = new Pokemon();
+    pokemon.number = pokeDetails.order;
+    pokemon.name = pokeDetails.name;
+    
+    pokemon.types = pokeDetails.types.map((typeSlot) => typeSlot.type.name);
+    const [type] = pokemon.types;
+    pokemon.type = type;
+    
+    pokemon.photo = pokeDetails.sprites.other.dream_world.front_default;
+    
+    return pokemon;
+}
+
 pokeApi.getDetailsUrl= (pokemon) => {
-    return fetch(pokemon.url).then((response) => response.json())
+    return fetch(pokemon.url)
+            .then((response) => response.json())
+            .then(convertPokeDetailsToPokemon);
 }
 
 
