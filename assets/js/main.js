@@ -3,7 +3,7 @@ const pokemonListEl = document.querySelector('.pokemons');
 function addPokemonOnList(pokemon){
     return`
     <li class="pokemon">
-    <span class="number">#001</span>
+    <span class="number">#${pokemon.order}</span>
     ${pokemon.name}
 
     <div class="detail">
@@ -22,9 +22,7 @@ function addPokemonOnList(pokemon){
 }
 
 
-pokeApi.getPokemons().then((pokemons) => {
-        pokemons.forEach(pokemon => {
-            pokemonListEl.innerHTML += addPokemonOnList(pokemon);
-        });
+pokeApi.getPokemons().then((pokemons = []) => {
+    pokemonListEl.innerHTML = pokemons.map(addPokemonOnList).join('');
     })
     .catch((error) => console.log(error))
